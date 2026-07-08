@@ -33,8 +33,12 @@ VALUES
 
 SELECT * FROM employees_analysis;
 
+-- 1. ORDER BY
+-- Ascending (Default)
+
 SELECT * FROM employees_analysis ORDER BY salary; -- def ASC
 
+-- Descending
 SELECT * 
 FROM employees_analysis
 ORDER BY salary DESC;  -- DESCENDING
@@ -47,6 +51,8 @@ SELECT *
 FROM employees_analysis
 ORDER BY department ASC, salary DESC;
 
+-- 2. DISTINCT
+
 SELECT department
 FROM employees_analysis;
 
@@ -56,6 +62,10 @@ FROM employees_analysis;
 SELECT DISTINCT city
 FROM employees_analysis;
 
+
+-- 3. Aggregate Functions
+
+-- COUNT()
 SELECT COUNT(*) AS TOTAL_EMPLOYEES
 FROM employees_analysis;
 
@@ -63,49 +73,56 @@ SELECT COUNT(*) AS FINANCE_COUNT
 FROM employees_analysis
 WHERE department = 'Finance';
 
+-- SUM()
 SELECT SUM(salary) AS Total_salary
 FROM employees_analysis;
 
+-- AVG()
 SELECT AVG(salary) AS Average_salary
 FROM employees_analysis;
 
+-- MAX()
 SELECT MAX(salary) AS Highest_Salary
 FROM employees_analysis;
 
+-- MIN()
 SELECT MIN(salary) AS Lowest_salary
 FROM employees_analysis;
 
--- GROUP BY
-
+-- 4. GROUP BY
+-- Average salary department-wise.
 SELECT department,
 AVG(salary) AS Average_Salary
 FROM employees_analysis
 GROUP BY department;
 
-
+-- Employee count per department
 SELECT department,
 COUNT(*) AS Employees
 FROM employees_analysis
 GROUP BY department;
 
-
+-- Highest salary in each department
 SELECT department,
 MAX(salary) AS Highest_Salary
 FROM employees_analysis
 GROUP BY department;
 
-
+-- Total salary by city
 SELECT city,
 SUM(salary) AS Total_Salary
 FROM employees_analysis
 GROUP BY city;
 
+-- 5. HAVING
+-- Departments having more than 2 employees.
 SELECT department,
 COUNT(*) AS Total_Employees
 FROM employees_analysis
 GROUP BY department
 HAVING COUNT(*) > 2;
 
+-- Departments with average salary greater than 50,000.
 SELECT department,
 AVG(salary) AS Average_Salary
 FROM employees_analysis
@@ -116,21 +133,15 @@ SELECT *
 FROM employees_analysis
 WHERE salary > 50000;
 
-
 SELECT department,
 AVG(salary)
 FROM employees_analysis
 GROUP BY department
 HAVING AVG(salary)>50000;
 
-
+-- Employees from Mumbai only, then group them.
 SELECT department,
 COUNT(*) AS Total
 FROM employees_analysis
 WHERE city='Mumbai'
 GROUP BY department;
-
-
-
-
-
