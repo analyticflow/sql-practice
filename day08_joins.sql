@@ -1,3 +1,4 @@
+/* JOINS */
 -- 1. INNER JOIN
 -- 2. LEFT JOIN
 -- 3. RIGHT JOIN
@@ -97,3 +98,79 @@ FROM managers e
 LEFT JOIN managers m
 ON e.manager_id=m.emp_id;
 
+/* ------------------------------------------------------------------------------- */
+
+USE school_db;
+
+INSERT INTO employee
+VALUES (106, 'Rohan', 5); 
+
+SELECT * FROM employee;
+
+-- INNER JOIN
+SELECT e.emp_name, d.dept_name
+FROM employee e 
+INNER JOIN department d
+ON e.dept_id = d.dept_id;
+	
+
+-- LEFT JOIN
+SELECT e.emp_name, d.dept_name
+FROM employee e
+LEFT JOIN department d
+ON e.dept_id = d.dept_id;
+
+
+-- 4. RIGHT JOIN
+SELECT
+e.emp_name,
+d.dept_name
+FROM employee e
+RIGHT JOIN department d
+ON e.dept_id=d.dept_id;
+
+
+-- FULL OUTER JOIN
+
+SELECT
+e.emp_name,
+d.dept_name
+FROM employee e
+LEFT JOIN department d
+ON e.dept_id=d.dept_id
+
+UNION
+
+SELECT
+e.emp_name,
+d.dept_name
+FROM employee e
+RIGHT JOIN department d
+ON e.dept_id=d.dept_id;
+
+
+-- CROSS JOIN 6 X 4 = 24 
+SELECT e.emp_name, d.dept_name
+FROM employee e
+CROSS JOIN department d;
+
+
+-- SELF JOIN
+
+SELECT * FROM managers;
+
+DELETE FROM managers;
+
+INSERT INTO managers
+VALUES
+(1,'CEO',NULL),
+(2,'Rahul',1),
+(3,'Priya',1),
+(4,'Keshav',2),
+(5,'Ankit',2),
+(6,'Neha',3);
+
+SELECT e.emp_name AS Employee,
+m.emp_name AS Manager
+FROM managers e
+LEFT JOIN managers m ON e.manager_id = m.emp_id;
