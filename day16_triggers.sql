@@ -116,3 +116,36 @@ DELIMITER ;
 UPDATE employees_trigger
 SET salary = -1000
 WHERE emp_id = 103;
+
+
+-- Q1. Show all employees whose salary is greater than the average salary.
+SELECT *
+FROM employees_trigger
+WHERE salary >
+(
+    SELECT AVG(salary)
+    FROM employees_trigger
+);
+
+
+-- Q2. Show employees sorted by salary in descending order.
+SELECT *
+FROM employees_trigger
+ORDER BY salary DESC;
+
+
+-- Q3. Count employees having salary greater than ₹50,000.
+SELECT COUNT(*) AS Total_Employees
+FROM employees_trigger
+WHERE salary > 50000;
+
+
+-- Q4. Show highest salary.
+SELECT MAX(salary) AS Highest_Salary
+FROM employees_trigger;
+
+
+-- Q5. Show employee names whose salary starts with 5.
+SELECT emp_name
+FROM employees_trigger
+WHERE salary LIKE '5%';
